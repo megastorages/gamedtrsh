@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Gamedtrsh Landing"
+version = "1.0.0"
+id = "artifacts/gamedtrsh-landing"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 21107
+
+[services.development]
+run = "pnpm --filter @workspace/gamedtrsh-landing run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/gamedtrsh-landing", "run", "build" ]
+publicDir = "artifacts/gamedtrsh-landing/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "21107"
+BASE_PATH = "/"
